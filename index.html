@@ -233,8 +233,10 @@ function applyLive(matches){
       let loser = null, winner = null;
       if (m.winner === 'HOME_TEAM'){ winner = m.home; loser = m.away; }
       else if (m.winner === 'AWAY_TEAM'){ winner = m.away; loser = m.home; }
+      // football-data folds shootout goals into fullTime, so on a FINISHED knockout match
+      // an unequal fullTime score is decisive even before the winner field is populated
+      else if (m.sh != null && m.sa != null && m.sh !== m.sa){ winner = m.sh > m.sa ? m.home : m.away; loser = m.sh > m.sa ? m.away : m.home; }
       else if (m.ph != null && m.pa != null && m.ph !== m.pa){ winner = m.ph > m.pa ? m.home : m.away; loser = m.ph > m.pa ? m.away : m.home; }
-      // if the API hasn't declared a winner and pens are tied/missing, leave both teams as-is until the next poll
       if (loser){
         out.add(loser);
         lastResult[loser] = `Eliminated in ${STAGE_LABEL[m.stage] || m.stage} \u2014 ${m.home} ${scoreStr(m)} ${m.away}`;
