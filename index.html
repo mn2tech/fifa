@@ -135,7 +135,7 @@ const WORLD = {"type":"Topology","objects":{"countries":{"type":"GeometryCollect
 ;
 const BASE_STATUS = {"Morocco": ["qf", "Quarterfinals — beat Canada 3-0, faces France Jul 9"], "France": ["qf", "Quarterfinals — beat Paraguay 1-0, faces Morocco Jul 9"], "Norway": ["qf", "Quarterfinals — beat Brazil 2-1, faces England Jul 11"], "Spain": ["qf", "Quarterfinals — beat Portugal 1-0, faces Belgium Jul 10"], "Belgium": ["qf", "Quarterfinals — beat USA 4-1, faces Spain Jul 10"], "Argentina": ["qf", "Quarterfinals — beat Egypt 3-2, faces Switzerland in Kansas City"], "Switzerland": ["qf", "Quarterfinals — beat Colombia 4-3 on penalties (0-0 AET), faces Argentina"], "United Kingdom": ["qf", "England: Quarterfinals — beat Mexico 3-2, faces Norway Jul 11. (Scotland eliminated — red dot)"], "Colombia": ["out", "Eliminated in Round of 16 — lost 4-3 on penalties to Switzerland (0-0 AET)"], "Canada": ["out", "Eliminated in Round of 16 (0-3 Morocco)"], "Mexico": ["out", "Eliminated in Round of 16 (2-3 England)"], "United States of America": ["out", "Eliminated in Round of 16 (1-4 Belgium)"], "Brazil": ["out", "Eliminated in Round of 16 (1-2 Norway)"], "Portugal": ["out", "Eliminated in Round of 16 (0-1 Spain)"], "Paraguay": ["out", "Eliminated in Round of 16 (0-1 France)"], "Egypt": ["out", "Eliminated in Round of 16 (2-3 Argentina)"], "Germany": ["out", "Eliminated — upset by Paraguay in Round of 32"], "Algeria": ["out", "Eliminated in Round of 32 (0-2 Switzerland)"], "Ghana": ["out", "Eliminated in Round of 32 (0-1 Colombia)"], "Bosnia and Herz.": ["out", "Eliminated in Round of 32 (0-2 USA)"], "South Africa": ["out", "Eliminated in Round of 32 (0-1 Canada)"], "Netherlands": ["out", "Eliminated"], "Croatia": ["out", "Eliminated"], "Czechia": ["out", "Eliminated"], "Sweden": ["out", "Eliminated"], "Turkey": ["out", "Eliminated"], "Austria": ["out", "Eliminated"], "Dem. Rep. Congo": ["out", "Eliminated"], "Côte d'Ivoire": ["out", "Eliminated"], "Senegal": ["out", "Eliminated"], "Tunisia": ["out", "Eliminated"], "Haiti": ["out", "Eliminated"], "Panama": ["out", "Eliminated"], "Ecuador": ["out", "Eliminated"], "Uruguay": ["out", "Eliminated in group stage"], "New Zealand": ["out", "Eliminated"], "Australia": ["out", "Eliminated"], "Iraq": ["out", "Eliminated"], "Iran": ["out", "Eliminated"], "Japan": ["out", "Eliminated"], "Jordan": ["out", "Eliminated"], "South Korea": ["out", "Eliminated"], "Qatar": ["out", "Eliminated"], "Saudi Arabia": ["out", "Eliminated"], "Uzbekistan": ["out", "Eliminated"]};
 const LABELS = {"United States of America": "USA", "United Kingdom": "England", "Dem. Rep. Congo": "DR Congo", "Côte d'Ivoire": "Ivory Coast", "Turkey": "Türkiye", "South Korea": "S. Korea", "New Zealand": "N. Zealand", "Belgium": "BEL", "Switzerland": "SUI"};
-const SKIP_LABELS = new Set(['Portugal','Netherlands','Czechia','Austria','Croatia','Bosnia and Herz.','Sweden']);
+const SKIP_LABELS = new Set(['Netherlands','Czechia','Austria','Croatia','Bosnia and Herz.','Sweden']);
 
 // football-data.org team name -> map shape name
 const NAME_MAP = {
@@ -201,7 +201,7 @@ const nudge = {
   'Canada':[0,25], 'Norway':[-10,20], 'France':[-2,10], 'Germany':[6,-2],
   'Belgium':[-4,2], 'Switzerland':[2,6], 'United Kingdom':[-6,6],
   'Japan':[10,0], 'New Zealand':[8,-4], 'Haiti':[0,-4], 'Panama':[0,6],
-  'Qatar':[4,4], 'Ecuador':[-6,0], 'Morocco':[-4,-2]
+  'Qatar':[4,4], 'Ecuador':[-6,0], 'Morocco':[-4,-2], 'Portugal':[-26,8]
 };
 
 const DOTS = {
