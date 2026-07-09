@@ -58,7 +58,16 @@
   .country.out:hover{fill:var(--out-hover)}
   .country.qf{fill:var(--qf);cursor:pointer}
   .country.qf:hover{fill:var(--qf-hover)}
-  .country.live{fill:var(--live);cursor:pointer;animation:pulse 1.6s infinite}
+  .country.live{fill:var(--live);cursor:pointer;animation:glowpulse 1.6s ease-in-out infinite;stroke:#ffd9b8;stroke-width:1}
+  @keyframes glowpulse{
+    0%,100%{opacity:1;filter:drop-shadow(0 0 3px rgba(255,138,61,.7))}
+    50%{opacity:.82;filter:drop-shadow(0 0 14px rgba(255,166,77,1))}
+  }
+  /* when a match is live, everything else recedes */
+  svg.has-live .country:not(.live){opacity:.45;transition:opacity .8s}
+  svg.has-live .lbl:not(.live){opacity:.5;transition:opacity .8s}
+  svg.has-live .micro{opacity:.5}
+  svg.has-live .lbl.live{font-size:13px}
   .micro{stroke:var(--bg);stroke-width:1;cursor:pointer}
   .lbl{pointer-events:none;font-family:inherit;paint-order:stroke;stroke:#0d1420;stroke-width:2.4px;stroke-linejoin:round}
   .lbl.qf,.lbl.live{font-weight:800;fill:#fff}
@@ -315,6 +324,9 @@ function render(){
     const s = STATUS[d.properties.name];
     return 'country ' + (s ? s[0] : 'idle');
   });
+  const anyLive = Object.values(STATUS).some(s => s[0] === 'live');
+  svg.classed('has-live', anyLive);
+  if (anyLive) countryPaths.filter(d => (STATUS[d.properties.name]||[])[0] === 'live').raise();
   labelG.selectAll('*').remove();
   countries.forEach(f => {
     const name = f.properties.name;
@@ -413,8 +425,13 @@ function applyLive(matches){
   if (upcoming.length && cards.length < 2){
     const m = upcoming[0];
     const d = new Date(m.utcDate);
+    let oddsLine = '';
+    try {
+      const pH = Math.round(winProb(m.home, m.away) * 100);
+      oddsLine = `<div class="m-sub">Our model: <b style="color:var(--qf)">${m.home} ${pH}%</b> \u00b7 ${m.away} ${100 - pH}%</div>`;
+    } catch(e){}
     cards.push(`<div class="match"><div class="m-tag">Up next \u00b7 ${STAGE_LABEL[m.stage]||m.stage}</div>
-      <div class="m-line"><span>${m.home}</span><span class="m-score" style="font-size:12px">${d.toLocaleString([], {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'})}</span><span>${m.away}</span></div></div>`);
+      <div class="m-line"><span>${m.home}</span><span class="m-score" style="font-size:12px">${d.toLocaleString([], {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'})}</span><span>${m.away}</span></div>${oddsLine}</div>`);
   }
   if (cards.length) board.innerHTML = cards.join('');
   render();
